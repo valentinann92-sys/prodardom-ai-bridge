@@ -1,11 +1,6 @@
 from fastapi import FastAPI
 from fastmcp import FastMCP
-
-app = FastAPI(title="PRODARDOM AI Bridge")
-
 mcp = FastMCP("PRODARDOM AI Bridge")
-
-
 @mcp.tool()
 def create_content_plan(child_name: str):
     """
@@ -20,6 +15,11 @@ def create_content_plan(child_name: str):
         ]
     }
 
+mcp_app = mcp.http_app(path="/")
+
+app = FastAPI(title="PRODARDOM AI Bridge", lifespan=mcp_app.lifespan)
+
+app.mount("/mcp", mcp_app)
 
 @app.get("/")
 def home():
@@ -28,12 +28,6 @@ def home():
         "message": "MCP коннектор запущен"
     }
 
-
 @app.get("/health")
 def health():
-    return {
-        "ok": True
-    }
-mcp_app = mcp.http_app()
-
-app.mount("/mcp", mcp_app)
+    return {"ok": True}
