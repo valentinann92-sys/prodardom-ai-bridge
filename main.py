@@ -37,4 +37,3 @@ def health():
 mcp_app = mcp.http_app()
 
 app.mount("/mcp", mcp_app)
-
