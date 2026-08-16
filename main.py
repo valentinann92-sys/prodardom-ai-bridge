@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from mcp.server.fastmcp import FastMCP
+from fastapi import FastAPI, Request
 
 app = FastAPI(title="PRODARDOM AI Bridge")
 
@@ -42,3 +42,7 @@ def mcp_info():
             "create_content_plan"
         ]
     }
+@app.post("/mcp")
+async def mcp_post(request: Request):
+    body = await request.json()
+    return await mcp.handle_request(body)
