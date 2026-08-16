@@ -1,13 +1,31 @@
 from fastapi import FastAPI
+from mcp.server.fastmcp import FastMCP
 
 app = FastAPI(title="PRODARDOM AI Bridge")
+
+mcp = FastMCP("PRODARDOM AI Bridge")
+
+
+@mcp.tool()
+def create_content_plan(child_name: str):
+    """
+    Создаёт идею контента для ребёнка-артиста.
+    """
+    return {
+        "child": child_name,
+        "ideas": [
+            "Reels с тренировкой",
+            "Закулисье записи песни",
+            "История артиста"
+        ]
+    }
 
 
 @app.get("/")
 def home():
     return {
         "status": "PRODARDOM AI Bridge работает",
-        "message": "Коннектор запущен"
+        "message": "MCP коннектор запущен"
     }
 
 
