@@ -1,5 +1,5 @@
-
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
+from fastmcp import FastMCP
 
 app = FastAPI(title="PRODARDOM AI Bridge")
 
@@ -34,12 +34,7 @@ def health():
     return {
         "ok": True
     }
-@app.get("/mcp")
-def mcp_info():
-    return {
-        "name": "PRODARDOM AI Bridge",
-        "tools": [
-            "create_content_plan"
-        ]
-    }
+mcp_app = mcp.http_app()
+
+app.mount("/mcp", mcp_app)
 
