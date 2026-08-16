@@ -34,6 +34,6 @@ def health():
     return {
         "ok": True
     }
-mcp_app = mcp.http_app()
+mcp_app = mcp.http_app(path="/")
 
 app.mount("/mcp", mcp_app)
