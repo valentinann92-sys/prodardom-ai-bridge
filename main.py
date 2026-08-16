@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from mcp.server import FastMCP
+from mcp.server.fastmcp import FastMCP
 
 app = FastAPI(title="PRODARDOM AI Bridge")
 
