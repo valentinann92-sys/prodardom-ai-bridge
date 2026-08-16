@@ -34,3 +34,11 @@ def health():
     return {
         "ok": True
     }
+@app.get("/mcp")
+def mcp_info():
+    return {
+        "name": "PRODARDOM AI Bridge",
+        "tools": [
+            "create_content_plan"
+        ]
+    }
